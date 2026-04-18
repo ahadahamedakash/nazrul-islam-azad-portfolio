@@ -326,7 +326,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Md. Azad**
 
-- Website: [https://azad-portfolio.vercel.app](https://azad-portfolio.vercel.app)
+- Website: [https://nazrulislamazad.vercel.app](https://nazrulislamazad.vercel.app)
 - Email: azad@example.com
 - LinkedIn: [Your Profile]
 - GitHub: [Your Profile]
