@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
+import { LazyMotion, domAnimation } from "framer-motion";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import Navbar from "@/components/layout/Navbar";
+import PageLoader from "@/components/ui/PageLoader";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -62,10 +64,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
       <body>
-        <LenisProvider>
-          <Navbar />
-          {children}
-        </LenisProvider>
+        <PageLoader />
+        <LazyMotion features={domAnimation}>
+          <LenisProvider>
+            <Navbar />
+            {children}
+          </LenisProvider>
+        </LazyMotion>
       </body>
     </html>
   );
