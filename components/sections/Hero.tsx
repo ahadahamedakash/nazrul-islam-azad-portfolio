@@ -1,11 +1,20 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Circle, ArrowRight, Download } from "lucide-react";
 import { fadeUp, fadeIn, staggerContainer } from "@/lib/animations";
 import HeroScene from "@/components/3d/HeroScene";
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Effects - Behind Canvas */}
@@ -40,7 +49,7 @@ export default function Hero() {
       </div>
 
       {/* 3D Scene - Full Background */}
-      <HeroScene />
+      {!isMobile && <HeroScene />}
 
       {/* Dark Gradient Overlay - Rebalanced */}
       <div

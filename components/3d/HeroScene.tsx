@@ -300,9 +300,14 @@ export default function HeroScene() {
   return (
     <div className="absolute inset-0 w-full h-full">
       <Canvas
-        camera={{ position: [0, 0, 11], fov: 40 }}
-        gl={{ antialias: true, alpha: true }}
-        shadows
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
+        gl={{
+          antialias: false,
+          powerPreference: 'high-performance'
+        }}
+        camera={{ position: [0, 0.5, 10], fov: 42 }}
+        style={{ background: 'transparent' }}
       >
         <OrbitControls
           enableZoom={false}

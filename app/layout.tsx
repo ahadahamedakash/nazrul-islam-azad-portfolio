@@ -3,15 +3,18 @@ import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import Navbar from "@/components/layout/Navbar";
+import PageLoader from "@/components/ui/PageLoader";
 
 const syne = Syne({
   subsets: ["latin"],
+  weight: ['400', '600', '700', '800'],
   variable: "--font-syne",
   display: "swap",
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
+  weight: ['300', '400', '500', '600'],
   variable: "--font-dm-sans",
   display: "swap",
 });
@@ -61,11 +64,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
-      <body>
-        <LenisProvider>
+      <body style={{ backgroundColor: '#0b0f14' }}>
+        <PageLoader>
           <Navbar />
-          {children}
-        </LenisProvider>
+          <LenisProvider>
+            {children}
+          </LenisProvider>
+        </PageLoader>
       </body>
     </html>
   );
