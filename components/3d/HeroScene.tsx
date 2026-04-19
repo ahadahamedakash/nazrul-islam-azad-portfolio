@@ -202,10 +202,10 @@ function PhotonParticle({ position }: { position: [number, number, number] }) {
 function Scene() {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Generate 25 photon particles (reduced from 50 for performance)
+  // Generate 50 photon particles
   const particles = useMemo(() => {
     const particlePositions: [number, number, number][] = [];
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 50; i++) {
       particlePositions.push([
         (Math.random() - 0.5) * 8,
         (Math.random() - 0.5) * 8,
@@ -301,13 +301,7 @@ export default function HeroScene() {
     <div className="absolute inset-0 w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 11], fov: 40 }}
-        gl={{
-          antialias: false,
-          alpha: true,
-          powerPreference: "high-performance"
-        }}
-        dpr={[1, 1.5]}
-        performance={{ min: 0.5 }}
+        gl={{ antialias: true, alpha: true }}
         shadows
       >
         <OrbitControls

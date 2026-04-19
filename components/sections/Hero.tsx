@@ -1,74 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Circle, ArrowRight, Download } from "lucide-react";
 import { fadeUp, fadeIn, staggerContainer } from "@/lib/animations";
-import dynamic from "next/dynamic";
-
-// Lazy load HeroScene - disabled on mobile and SSR
-const HeroScene = dynamic(() => import("@/components/3d/HeroScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-[var(--bg)]">
-      <motion.div
-        initial={{ opacity: 0.4, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut"
-        }}
-        className="relative"
-        style={{ width: "300px", height: "200px" }}
-      >
-        {/* Solar panel placeholder */}
-        <div
-          className="absolute inset-0 border-2 rounded-lg"
-          style={{
-            borderColor: "var(--accent)",
-            background: "linear-gradient(135deg, rgba(245,166,35,0.1) 0%, rgba(0,201,167,0.05) 100%)",
-            opacity: 0.6
-          }}
-        />
-        {/* Grid lines */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(245,166,35,0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(245,166,35,0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: "50px 50px",
-            opacity: 0.3
-          }}
-        />
-        {/* Glowing center */}
-        <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(245,166,35,0.4) 0%, transparent 70%)",
-            filter: "blur(20px)"
-          }}
-        />
-      </motion.div>
-    </div>
-  )
-});
+import HeroScene from "@/components/3d/HeroScene";
 
 export default function Hero() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Effects - Behind Canvas */}
@@ -102,8 +39,8 @@ export default function Hero() {
         />
       </div>
 
-      {/* 3D Scene - Only load on desktop and after mount */}
-      {mounted && !isMobile && <HeroScene />}
+      {/* 3D Scene - Full Background */}
+      <HeroScene />
 
       {/* Dark Gradient Overlay - Rebalanced */}
       <div
